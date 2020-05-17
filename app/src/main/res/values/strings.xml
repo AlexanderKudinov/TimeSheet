@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Time sheet</string>
+
+    <!-- menu -->
+    <string name="profile">Профиль</string>
+    <string name="jobMarks">Отметки</string>
+    <string name="calendar">Каледарь</string>
+
+    <!-- profile fragment -->
+    <string name="department">Департамент</string>
+    <string name="jobPosition">Должность</string>
+
+    <!-- departments -->
+    <string name="departments">Департаменты</string>
+    <string name="enterTitle">Введите название:</string>
+
+    <!-- calendar -->
+    <string name="workingDay">Рабочий день</string>
+    <string name="restDay">Выходной день</string>
+    <string name="holiday">Праздник</string>
+    <string name="preHoliday">Предпраздничный день</string>
+
+    <!-- actions -->
+    <string name="ok">ОК</string>
+    <string name="cancel">Отмена</string>
+    <string name="entrance">Вход</string>
+</resources>
