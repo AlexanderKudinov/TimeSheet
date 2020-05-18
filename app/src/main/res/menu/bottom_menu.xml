@@ -3,13 +3,16 @@
 
     <item
         android:id="@+id/navProfile"
-        android:title="@string/profile"/>
+        android:title="@string/profile"
+        android:icon="@drawable/icon_profile_gray_24" />
 
     <item
         android:id="@+id/navJobMarks"
-        android:title="@string/jobMarks"/>
+        android:title="@string/jobMarks"
+        android:icon="@drawable/icon_marks_gray_24" />
 
     <item
         android:id="@+id/navCalendar"
-        android:title="@string/calendar"/>
+        android:title="@string/calendar"
+        android:icon="@drawable/icon_calendar_gray_24" />
 </menu>

@@ -9,6 +9,7 @@
     <color name="red">#D50000</color>
     <color name="darkRed">#6A0505</color>
     <color name="blue">#304FFE</color>
+    <color name="darkBlue">#061775</color>
     <color name="orange">#FF6D00</color>
     <color name="yellow">#FFD600</color>
 </resources>

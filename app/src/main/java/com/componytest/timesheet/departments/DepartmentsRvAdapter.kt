@@ -2,14 +2,18 @@ package com.componytest.timesheet.departments
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.componytest.timesheet.R
+import com.componytest.timesheet.profile.Employee.Companion.DEPARTMENT_ADMINISTRATOR
+import com.componytest.timesheet.profile.Employee.Companion.WORKERS_ADMINISTRATOR
 import kotlinx.android.synthetic.main.rv_card_department.view.*
 import java.lang.ref.WeakReference
 
 class DepartmentsRvAdapter(
-    private val clickListener: WeakReference<IClickListener>
+    private val clickListener: WeakReference<IClickListener>,
+    private val userJob: String?
 ): RecyclerView.Adapter<DepartmentsRvAdapter.DepartmentViewHolder>() {
 
     private val departments = arrayListOf<Department>()
@@ -60,7 +64,7 @@ class DepartmentsRvAdapter(
     inner class DepartmentViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val btnChange = itemView.btnChangeDepartment
         private val btnDelete = itemView.btnDeleteDepartment
-        private val btnAdd = itemView.btnAddEmployeeToDepartment
+        private val btnAddEmployee = itemView.btnAddEmployeeToDepartment
         private val tvDepartmentName = itemView.tvDepartment_departments
 
         init {
@@ -70,13 +74,19 @@ class DepartmentsRvAdapter(
             btnDelete.setOnClickListener {
                 clickListener.get()?.removeDepartment(departments[adapterPosition].id, adapterPosition)
             }
-            btnAdd.setOnClickListener {
+            btnAddEmployee.setOnClickListener {
                 clickListener.get()?.addEmployeeToDepartment(departments[adapterPosition].id)
             }
         }
 
         fun bind() {
             tvDepartmentName.text = departments[adapterPosition].name
+            if (userJob == DEPARTMENT_ADMINISTRATOR)
+                btnChange.visibility = VISIBLE
+            else if (userJob == WORKERS_ADMINISTRATOR) {
+                btnAddEmployee.visibility = VISIBLE
+                btnDelete.visibility = INVISIBLE
+            }
         }
     }
 

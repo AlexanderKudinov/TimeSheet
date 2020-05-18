@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.componytest.timesheet.BaseFragment
 import com.componytest.timesheet.NestedFragment
 import com.componytest.timesheet.R
+import com.componytest.timesheet.profile.Employee
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.dialog_create_department.view.*
@@ -26,7 +28,7 @@ class DepartmentsFragment: NestedFragment(), IDepartmentView, DepartmentsRvAdapt
     }
 
     private var departmentsWithEmployees = arrayListOf<Department_Employee>()
-    private val adapter = DepartmentsRvAdapter(WeakReference(this))
+    private lateinit var adapter: DepartmentsRvAdapter
     private lateinit var btnAddDepartment: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var departmentPresenter: IDepartmentPresenter
@@ -36,6 +38,7 @@ class DepartmentsFragment: NestedFragment(), IDepartmentView, DepartmentsRvAdapt
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.readDepWithEmpFromDb(mainActivity.dbHelper.readableDatabase)
+        adapter = DepartmentsRvAdapter(WeakReference(this), mainActivity.user?.jobPosition)
         adapter.setDepartments(mainActivity.departments)
         departmentPresenter = DepartmentsPresenter(WeakReference(this))
     }
@@ -50,6 +53,7 @@ class DepartmentsFragment: NestedFragment(), IDepartmentView, DepartmentsRvAdapt
         findViews(viewRoot)
         recyclerView.adapter = adapter
         setListeners()
+        checkRights(viewRoot)
 
         viewModel.getDepWithEmp().observe(viewLifecycleOwner, Observer { em ->
             departmentsWithEmployees = em
@@ -153,6 +157,10 @@ class DepartmentsFragment: NestedFragment(), IDepartmentView, DepartmentsRvAdapt
         }.create().show()
     }
 
+    private fun checkRights(viewRoot: View) {
+        if (mainActivity.user?.jobPosition == Employee.WORKERS_ADMINISTRATOR)
+            btnAddDepartment.hide()
+    }
 
 
 

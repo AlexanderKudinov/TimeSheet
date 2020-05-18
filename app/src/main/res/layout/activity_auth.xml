@@ -23,6 +23,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="50dp"
-        android:text="@string/entrance" />
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:text="@string/entrance"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_blue"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
